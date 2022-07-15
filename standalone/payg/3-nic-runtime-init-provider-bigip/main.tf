@@ -21,6 +21,10 @@ terraform {
       source  = "hashicorp/local"
       version = "2.1.0"
     }
+    bigip = {
+      source = "F5Networks/bigip"
+      version = "1.13.0"
+    }
   }
 }
 
@@ -32,6 +36,11 @@ provider "azurerm" {
   tenant_id       = var.tenant_id  
 }
 
+provider "bigip" {
+  address  = azurerm_public_ip.mgmt_pip.ip_address
+  username = var.user_name
+  password = var.user_password
+}
 
 # Create a random id
 resource "random_id" "id" {
@@ -51,7 +60,7 @@ resource "azurerm_ssh_public_key" "f5_key" {
   public_key          = file("~/.ssh/id_rsa.pub")
 }
 #Create Azure Managed User Identity and Role Definition
-resource "azurerm_user_assigned_identity" "bigip_user_identity" {
+resource "azurerm_user_assigned_identity" "user_identity" {
   name                = "${var.prefix}-ident"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
@@ -60,19 +69,5 @@ resource "azurerm_user_assigned_identity" "bigip_user_identity" {
 resource "azurerm_role_assignment" "rg_contributor" {
   scope                = azurerm_resource_group.rg.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.bigip_user_identity.principal_id
+  principal_id         = azurerm_user_assigned_identity.user_identity.principal_id
 }
-
-# data "azurerm_subscription" "rg" {}
-
-# resource "azurerm_role_assignment" "bigip_contributor" {
-#   //name                 = azurerm_linux_virtual_machine.bigip0.id
-#   count                = var.default_instance_count
-#   scope                = data.azurerm_subscription.rg.id
-#   role_definition_id   = "${data.azurerm_subscription.rg.id}${data.azurerm_role_definition.contributor.id}"
-#   principal_id         = lookup(azurerm_linux_virtual_machine.bigip[count.index].identity[0], "principal_id")
-# }
-
-# data "azurerm_role_definition" "contributor" {
-#   name = "Contributor"
-# }

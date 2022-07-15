@@ -27,6 +27,7 @@ resource "azurerm_lb" "alb" {
 resource "azurerm_lb_backend_address_pool" "bigip_backend_pool" {
   loadbalancer_id = azurerm_lb.alb.id
   name            = "BIG-IP_Backend_Pool"
+  depends_on = [ azurerm_network_interface.external ]
 }
 
 # Create probe

@@ -1,0 +1,58 @@
+{
+    "class": "AS3",
+    "action": "deploy",
+    "declaration":{
+    "applicationDescription": "This is an HTTP AS3 Application service",
+    "applicationName": "MyApplication",
+    "appSvcsDeclaration": {
+            "class": "ADC",
+            "schemaVersion": "3.12.0",
+            "target": {
+                    "address": "172.16.1.80"
+            },
+            "MyApplicationTenant": {
+                    "class": "Tenant",
+                    "MyApplicationService1": {
+                            "class": "Application",
+                            "template": "http",
+                            "serviceMain": {
+                                    "virtualPort": 80,
+                                    "virtualAddresses": [
+                                            "172.16.254.88"
+                                    ],
+                                    "profileAnalytics": {
+                                            "use": "Analytics_Profile"
+                                    },
+                                    "pool": "Pool",
+                                    "class": "Service_HTTP"
+                            },
+                            "Analytics_Profile": {
+                                    "class": "Analytics_Profile",
+                                    "collectClientSideStatistics": true,
+                                    "collectOsAndBrowser": false,
+                                    "collectMethod": false,
+                                    "collectResponseCode": true
+                            },
+                            "Pool": {
+                                    "members": [{
+                                            "serverAddresses": [
+                                                    "172.16.20.55",
+                                                    "172.16.20.56"
+                                            ],
+                                            "servicePort": 80,
+                                            "monitors": [
+                                                    "http"
+                                            ],
+                                            "adminState": "enable",
+                                            "shareNodes": true
+                                    }],
+                                    "class": "Pool",
+                                    "monitors": [
+                                            "http"
+                                    ]
+                            }
+                    }
+            }
+    }
+}
+}

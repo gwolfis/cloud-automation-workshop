@@ -61,6 +61,15 @@ runtime_parameters:
   - name: F5_CLOUD_FAILOVER_LABEL
     type: static
     value: ${f5_cloud_failover_label}
+  - name: WORKSPACE_ID
+    type: static
+    value: ${workspace_id}
+  - name: UNIQUE_STRING
+    type: static
+    value: ${unique_string}
+  - name: PRIMARY_KEY
+    type: static
+    value: ${primary_key}
   - name: RESOURCE_GROUP_NAME
     type: url
     value: 'http://169.254.169.254/metadata/instance/compute?api-version=2020-09-01'
@@ -236,6 +245,61 @@ extension_services:
             - range: '0.0.0.0/0'
           defaultNextHopAddresses:
             discoveryType: routeTag
+    - extensionType: ts
+      type: inline
+      value:
+        class: Telemetry
+        controls:
+          class: Controls
+          logLevel: debug
+        My_Metrics_Namespace:
+          class: Telemetry_Namespace
+          My_System_Poller:
+            class: Telemetry_System_Poller
+            interval: 60
+            actions:
+              - includeData: {}
+                locations:
+                  system:
+                    cpu: true
+          My_Scaling_Endpoints:
+            class: Telemetry_Endpoints
+            items:
+              throughputIn:
+                name: throughputIn
+                path: /mgmt/tm/sys/performance/throughput?$top=1&$select=Current
+              hostname:
+                name: hostname
+                path: /mgmt/tm/sys/global-settings?$select=hostname
+          My_Custom_Endpoints_Poller:
+            class: Telemetry_System_Poller
+            interval: 60
+            endpointList:
+              - My_Scaling_Endpoints/hostname
+              - My_Scaling_Endpoints/throughputIn
+          My_Telemetry_System:
+            class: Telemetry_System
+            systemPoller:
+              - My_System_Poller
+              - My_Custom_Endpoints_Poller
+          My_Azure_Application_Insights:
+            appInsightsResourceName: '{{{UNIQUE_STRING}}}-insights'
+            class: Telemetry_Consumer
+            maxBatchIntervalMs: 5000
+            maxBatchSize: 250
+            type: Azure_Application_Insights
+            useManagedIdentity: true
+        My_Remote_Logs_Namespace:
+          class: Telemetry_Namespace
+          My_Listener:
+            class: Telemetry_Listener
+            port: 6514
+          My_Azure_Log_Analytics:
+            class: Telemetry_Consumer
+            type: Azure_Log_Analytics
+            workspaceId: '{{{WORKSPACE_ID}}}'
+            useManagedIdentity: true
+            region: '{{{REGION}}}'
 post_onboard_enabled: []
 EOF
 

@@ -7,7 +7,7 @@
         "class": "ADC",
         "remark": "Autoscale",
         "label": "Autoscale",
-        "Tenant2": {
+        "Tenant_2": {
             "class": "Tenant",
             "Shared": {
                 "class": "Application",
@@ -102,7 +102,7 @@
                         {
                             "servicePort": 80,
                             "serverAddresses": [
-                                "${poolmember-2}"
+                                "10.1.3.102"
                             ]
                         }
                     ],
@@ -123,15 +123,15 @@
                         "use": "WAFPolicy"
                     },
                     "profileTrafficLog": {
-                        "use": "/Tenant_1/Shared/telemetry_traffic_log_profile"
+                        "use": "/Tenant_2/Shared/telemetry_traffic_log_profile"
                     },
-                    "pool": "/Tenant_1/Shared/shared_pool",
+                    "pool": "/Tenant_2/Shared/shared_pool",
                     "securityLogProfiles": [
                         {
                             "bigip": "/Common/Log all requests"
                         },
                         {
-                            "use": "/Tenant_1/Shared/telemetry_asm_security_log_profile"
+                            "use": "/Tenant_2/Shared/telemetry_asm_security_log_profile"
                         }
                     ],
                     "serverTLS": {

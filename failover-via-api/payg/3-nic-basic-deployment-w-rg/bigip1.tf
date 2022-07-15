@@ -103,9 +103,8 @@ resource "azurerm_network_interface_security_group_association" "bigip1_intnsg" 
 }
 
 # Onboard Template BIGIP1
-data "template_file" "init_file1" {
-  template = file("${path.module}/onboard.tpl")
-  vars = {
+locals {
+  bigip_onboard1 = templatefile("${path.module}/onboard.tpl", {
     INIT_URL                = local.setup.f5_atc.INIT_URL
     DO_URL                  = local.setup.f5_atc.DO_URL
     AS3_URL                 = local.setup.f5_atc.AS3_URL
@@ -120,7 +119,7 @@ data "template_file" "init_file1" {
     user_name               = local.setup.bigip.user_name
     user_password           = local.setup.bigip.user_password
     host_name               = "${local.setup.azure.prefix}-bigip1"
-    host_name_0             = "${local.setup.azure.prefix}-bigip0" 
+    host_name_0             = "${local.setup.azure.prefix}-bigip0"
     host_name_1             = "${local.setup.azure.prefix}-bigip1"
     remote_host_int         = azurerm_network_interface.bigip0_internal.private_ip_address
     self_ip_external        = azurerm_network_interface.bigip1_external.private_ip_address
@@ -128,7 +127,10 @@ data "template_file" "init_file1" {
     management_gateway      = local.setup.network.management_gateway
     external_gateway        = local.setup.network.external_gateway
     f5_cloud_failover_label = "${local.setup.azure.prefix}-failover-label"
-  }
+    unique_string           = local.setup.azure.unique_string
+    workspace_id            = azurerm_log_analytics_workspace.law.workspace_id
+    primary_key             = azurerm_log_analytics_workspace.law.primary_shared_key
+  })
 }
 
 # BIGIP1 VM
@@ -137,12 +139,12 @@ resource "azurerm_linux_virtual_machine" "bigip1" {
   resource_group_name             = azurerm_resource_group.rg.name
   location                        = azurerm_resource_group.rg.location
   size                            = local.setup.bigip.instance_type
-  zone                            = 1
+  zone                            = 2
   disable_password_authentication = false
   admin_username                  = local.setup.bigip.user_name
   admin_password                  = local.setup.bigip.user_password
   network_interface_ids           = [azurerm_network_interface.bigip1_management.id, azurerm_network_interface.bigip1_external.id, azurerm_network_interface.bigip1_internal.id]
-  custom_data                     = base64encode(data.template_file.init_file1.rendered)
+  custom_data                     = base64encode(local.bigip_onboard1)
 
   admin_ssh_key {
     username   = local.setup.bigip.user_name

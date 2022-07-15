@@ -61,14 +61,14 @@ resource "azurerm_virtual_machine_scale_set" "appvmss" {
   }
 
   network_profile {
-    name                      = "internal"
+    name                      = "external"
     primary                   = true
-    network_security_group_id = azurerm_network_security_group.intnsg.id
+    network_security_group_id = azurerm_network_security_group.extnsg.id
 
     ip_configuration {
       name      = "external"
       primary   = true
-      subnet_id = azurerm_subnet.internal.id
+      subnet_id = azurerm_subnet.external.id
     }
   }
 

@@ -1,6 +1,6 @@
 # Workshop - Deploying Cloud and Automate with F5 BIG-IP
 
-**This is a community based project As such, F5 does not provide any offical support for this project**
+**This is a community based project. As such, F5 does not provide any offical support for this project**
 
 This workshop is intended to learn what it takes to deploy F5 BIG-IP into cloud through the use of automation and maintain it throughout its ADC lifecycle.
 

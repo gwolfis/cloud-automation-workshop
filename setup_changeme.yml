@@ -1,0 +1,59 @@
+---
+## Azure variables
+azure:
+  student_number : "<student_number>"
+  prefix         : "student<student_number>-via-api"
+  location       : "westeurope"
+  environment    : "azure"
+  unique_string  : "studentapp"
+
+bigip:
+#Creds
+  user_name    : azureuser    # Don't change to 'admin'
+  user_password: F5emea2022!  # Always use a strong password
+
+# BIGIP instance specifics
+  instance_type   : "Standard_DS3_v2"
+  product         : "f5-big-ip-best"
+  image_name      : "f5-bigip-virtual-edition-25m-best-hourly"
+  bigip_version   : "16.0.101000"
+
+# Network
+network:
+  cidr               : "10.<student_number>.0.0/16"
+  subnet_management  : "10.<student_number>.0.0/24"
+  subnet_external    : "10.<student_number>.1.0/24"
+  subnet_internal    : "10.<student_number>.2.0/24"
+  subnet_webserver   : "10.<student_number>.3.0/24"
+  management_gateway : "10.<student_number>.0.1"
+  external_gateway   : "10.<student_number>.1.1"
+
+# VIPs
+vips:
+  vip-0   : "10.<student_number>.1.20"
+  vip-1   : "10.<student_number>.1.21"
+  vip-2   : "10.<student_number>.1.22"
+  vip-3   : "10.<student_number>.1.23"
+  vip-4   : "10.<student_number>.1.24"
+  vip-5   : "10.<student_number>.1.25"
+  vip-6   : "10.<student_number>.1.26"
+  vip-7   : "10.<student_number>.1.27"
+  vip-8   : "10.<student_number>.1.28"
+  vip-9   : "10.<student_number>.1.29"
+
+# Change the Webserver IP host address B-octet that it matches your student_number
+web:
+  poolmember-1           : "10.<student_number>.3.101"
+  poolmember-2           : "10.<student_number>.3.102"
+  service_discovery_value: "production"
+
+
+# F5 Automation Toolchain
+f5_atc:
+  DO_URL   : "https://github.com/F5Networks/f5-declarative-onboarding/releases/download/v1.27.0/f5-declarative-onboarding-1.27.0-6.noarch.rpm"
+  AS3_URL  : "https://github.com/F5Networks/f5-appsvcs-extension/releases/download/v3.35.0/f5-appsvcs-3.35.0-4.noarch.rpm"
+  TS_URL   : "https://github.com/F5Networks/f5-telemetry-streaming/releases/download/v1.28.0/f5-telemetry-1.28.0-2.noarch.rpm"
+  CFE_URL  : "https://github.com/F5Networks/f5-cloud-failover-extension/releases/download/v1.10.0/f5-cloud-failover-1.10.0-0.noarch.rpm"
+  FAST_URL : "https://github.com/F5Networks/f5-appsvcs-templates/releases/download/v1.17.0/f5-appsvcs-templates-1.17.0-1.noarch.rpm"
+  INIT_URL : "https://github.com/F5Networks/f5-bigip-runtime-init/releases/download/1.4.1/f5-bigip-runtime-init-1.4.1-1.gz.run"
+  libs_dir : "/config/cloud/azure/node_modules"

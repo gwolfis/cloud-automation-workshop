@@ -16,7 +16,7 @@ You can dowload this repo and start playing around on your own or follow the flo
 ## Table of Contents
 **********************************
 
-**[Getting Started](docs/Getting_Started.md)**
+**[Getting Started](docs/getting_started.md)**
 
 **[Module 1 - Starting the lab environment](docs/module_1/module_1.md)**
 

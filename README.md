@@ -48,7 +48,7 @@ You can dowload this repo and start playing around on your own or follow the flo
 
  * **[5.1 - Convert object-based BIG-IP configurations into AS3 declarations](docs/module_5/task5_1.md)**
 
-**[Module 6 - Day 2 Operations](docs/module_6/module_6.md)**
+**[Module 6 - Day 2: Operations](docs/module_6/module_6.md)**
  
  * **[6.1 - BIG-IP Visibility and Analytics with Telemetry Streaming](docs/module_6/task6_1.md)**
  * **[6.2 - BIG-IP Failover Testing](docs/module_6/task6_2.md)**

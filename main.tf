@@ -3,27 +3,27 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "2.94.0"
+      version = "3.20.0"
     }
     random = {
       source  = "hashicorp/random"
-      version = "3.1.0"
+      version = "3.3.2"
     }
     template = {
       source  = "hashicorp/template"
-      version = ">2.1.2"
+      version = "2.2.0"
     }
     null = {
       source  = "hashicorp/null"
-      version = ">2.1.2"
+      version = "3.1.1"
     }
     local = {
       source  = "hashicorp/local"
-      version = "2.1.0"
+      version = "2.2.3"
     }
     bigip = {
       source  = "F5Networks/bigip"
-      version = "1.13.1"
+      version = "1.15.1"
     }
   }
 }

@@ -16,7 +16,7 @@ bigip:
   instance_type   : "Standard_DS3_v2"
   product         : "f5-big-ip-best"
   image_name      : "f5-bigip-virtual-edition-25m-best-hourly"
-  bigip_version   : "16.0.101000"
+  bigip_version   : "16.1.202000"
 
 # Network
 network:

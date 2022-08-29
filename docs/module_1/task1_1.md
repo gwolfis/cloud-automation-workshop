@@ -38,7 +38,7 @@ This grabs the files we will going to use for the lab from Github and places the
 
 **Step 8:** Let’s open the folder in VSC, by selecting ![](../png/module1/task1_1_p6.png)
 
-in the left pane and in the Home directory select **cloud-automation-workshop > failover-via-api > payg > 3-nic-basic-deployment** and click **‘OK’**.
+in the left pane and in the Home directory select **cloud-automation-workshop** and click **‘OK’**.
 
 ![](../png/module1/task1_1_p7.png)
 
@@ -75,9 +75,9 @@ This workshop is built by using HashiCorp Terraform (https://www.terraform.io/) 
 
 ![](../png/module1/task1_1_p11.png)
 
-3. In **files** select **cloud-automation-workshop > failover-via-api > payg > 3-nic-basic-deployment** and **paste** folder **files**.
+3. In **files** select **cloud-automation-workshop** and **paste** folder **files**.
 
-4. When folder **files** is pasted into folder **3-nic-basic-deployment**, you can close the 'files' window.
+4. When folder **files** is pasted into folder **loud-automation-workshop**, you can close the window.
 
 ![](../png/module1/task1_1_p12.png)
 

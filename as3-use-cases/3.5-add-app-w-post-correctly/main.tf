@@ -2,7 +2,7 @@
 # The new application needs to get added to the JSON template and the AS3 declaration re-deployed
 
 terraform {
-  required_version = "~> 1.1.4"
+  required_version = "~> 1.3.2"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"

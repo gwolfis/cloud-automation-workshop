@@ -10,17 +10,25 @@ resource "azurerm_log_analytics_workspace" "law" {
 }
 
 #Create Azure Log Analytics Workbook
-resource "azurerm_template_deployment" "deploylaworkspace" {
+resource "azurerm_resource_group_template_deployment" "deploylaworkspace" {
   name                = "f5telemetry"
   resource_group_name = local.setup.azure.prefix
   deployment_mode     = "Incremental"
-  template_body       = file("deploylaworkspacetemplate.json")
-  parameters = {
-    "uniqueString"        = local.setup.azure.unique_string
-    "sku"                 = "PerGB2018"
-    "workbookDisplayName" = "F5 BIG-IP WAF View"
-    "workspaceName"       = "f5telemetry"
-  }
+  template_content    = file("deploylaworkspacetemplate.json")
+  parameters_content  = jsonencode ({
+    "uniqueString"        = { 
+      value = local.setup.azure.unique_string
+    },
+    "sku"                 = { 
+      value = "PerGB2018"
+    },
+    "workbookDisplayName" = { 
+      value = "F5 BIG-IP WAF View"
+    },
+    "workspaceName"       = { 
+      value = "f5telemetry"
+    }
+  })
 }
 
 #Create Azure Application Insights

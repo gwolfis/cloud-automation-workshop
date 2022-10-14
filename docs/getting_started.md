@@ -2,6 +2,8 @@
 
 ## Introduction
 
+This workshop makes use of an UDF Blueprint which can be found following this link: https://udf.f5.com/b/2c537e6f-8851-4539-a0c1-c03761b56e16#documentation.
+
 The created content includes pratical use cases which will help to gain insights when deploying F5 BIG-IP into cloud and want it to become part of the automated eco-system.
 
 From the workshop use cases you will learn:
@@ -13,7 +15,7 @@ From the workshop use cases you will learn:
 ![](png/getting_started/p1.png)
 
 ## How to use
-This workshop uses the **F5 UDF Lab** to ramp up a jumphost which enables the student to deploy a full lab depolyment into Azure. UDF will provide a jumphost which has all the tools installed to deploy the infrastructure environments.
+This workshop uses the **F5 UDF Lab** to ramp up a jumphost which enables the student to deploy a full lab deployment into Azure. UDF will provide a jumphost which has all the tools installed to deploy the infrastructure environments.
 
 When you don't have access to UDF but want to leverage the provided material, you can use your laptop which should have the following tools installed:
 

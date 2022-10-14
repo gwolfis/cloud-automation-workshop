@@ -18,8 +18,7 @@ resource "azurerm_network_interface" "web01-nic" {
     name        = "${local.setup.azure.prefix}-web01"
     environment = local.setup.azure.environment
   }
-  depends_on = [ azurerm_network_security_group.intnsg
-  ]
+  depends_on = [ azurerm_network_security_group.intnsg ]
 }
 
 # Create Web02 NIC
@@ -40,8 +39,7 @@ resource "azurerm_network_interface" "web02-nic" {
     name        = "${local.setup.azure.prefix}-web02"
     environment = local.setup.azure.environment
   }
-  depends_on = [ azurerm_network_security_group.intnsg
-  ]
+  depends_on = [ azurerm_network_security_group.intnsg  ]
 }
 
 # Connect the security group to the network interface

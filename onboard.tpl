@@ -304,11 +304,11 @@ post_onboard_enabled: []
 EOF
 
 # # Download Runtime-init
-#PACKAGE_URL='https://github.com/F5Networks/f5-bigip-runtime-init/releases/download/1.4.1/f5-bigip-runtime-init-1.4.1-1.gz.run'
+#PACKAGE_URL='https://github.com/F5Networks/f5-bigip-runtime-init/releases/download/1.5.1/f5-bigip-runtime-init-1.5.1-1.gz.run'
 for i in {1..30}; do
-    curl -fv --retry 1 --connect-timeout 5 -L ${INIT_URL} -o "/var/config/rest/downloads/f5-bigip-runtime-init-1.4.1-1.gz.run" && break || sleep 10
+    curl -fv --retry 1 --connect-timeout 5 -L ${INIT_URL} -o "/var/config/rest/downloads/f5-bigip-runtime-init-1.5.1-1.gz.run" && break || sleep 10
 done
 # Install
-bash /var/config/rest/downloads/f5-bigip-runtime-init-1.4.1-1.gz.run -- '--cloud azure'
+bash /var/config/rest/downloads/f5-bigip-runtime-init-1.5.1-1.gz.run -- '--cloud azure'
 # Run
 f5-bigip-runtime-init --config-file /config/cloud/runtime-init-conf.yaml

@@ -2,7 +2,7 @@
 # Will the deployment fail and leave allready deployed apps within the tenant untouched or will it lead to errors in production as well  
 
 terraform {
-  required_version = "~> 1.1.4"
+  required_version = "~> 1.3.2"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"

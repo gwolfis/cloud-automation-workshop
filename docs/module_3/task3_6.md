@@ -11,7 +11,7 @@ How has ever worked at operations knows that pullotion of assets from old config
 **Step 2:** Let's get an overview of all the deployed applications by performing a GET.
 
 Login BIG-IP with SSH and type:
-**curl -sk -u username:password -H "Accept: application/json" -H "Content-Type: application/json" -X GET https://bigip0-mgmt-pub-ip/mgmt/shared/appsvcs/declare | jq**
+**curl -sk -u username:password -H "Accept: application/json" -H "Content-Type: application/json" -X GET https://<i>bigip0-mgmt-pub-ip</i>/mgmt/shared/appsvcs/declare | jq**
 
 * Fill in your username and password.
 * Fill in management public IP address of one of the BIG-IPs 
@@ -96,7 +96,7 @@ Though tenant **lab_2** is being removed from the BIG-IP, Terraform will return 
 
 **Step 10:** Another way to delete tenants is by using REST-API via cURL. Login via SSH into the BIG-IP and at Shell copy and paste underneath syntax and adjust it with you username, password and BIG-IP management public IP address. Press **Enter** when ready.
 
-**curl -sk -u username:password -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE https://bigip0-mgmt-pub-ip/mgmt/shared/appsvcs/declare/lab_11**
+**curl -sk -u username:password -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE https://<i>bigip0-mgmt-pub-ip</i>/mgmt/shared/appsvcs/declare/lab_11**
 
 Question:
 *Did partition/tenant **lab_11** get removed?
@@ -105,7 +105,7 @@ Question:
 
 **Step 11:** Finally we will use one last cURL command to delete all declared AS3 deployments. At the BIG-IP Shell prompt reuse the previous cURL command and remove **/lab_11**.
 
-**curl -sk -u username:password -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE https://bigip0-mgmt-pub-ip/mgmt/shared/appsvcs/declare**
+**curl -sk -u username:password -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE https://<i>bigip0-mgmt-pub-ip</i>/mgmt/shared/appsvcs/declare**
 
 Login the BIG-IP GUI and:
 * Check the partitions. You should only have /Common.

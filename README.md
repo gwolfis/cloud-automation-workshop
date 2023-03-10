@@ -2,6 +2,27 @@
 
 **This is a community based project. As such, F5 does not provide any offical support for this project**
 
+-----
+
+**Latest Updates 10 March 2023**
+
+All azure deployments have been updated to the latest F5 Automation ToolChain (ATC) packages:
+* Declarative Onboarding (DO): [v1.36.0](https://github.com/F5Networks/f5-declarative-onboarding/releases)
+* Application Services 3 Extension (AS3): [v3.43.0](https://github.com/F5Networks/f5-appsvcs-extension/releases)
+* Telemetry Streaming (TS): [v1.32.0](https://github.com/F5Networks/f5-telemetry-streaming/releases)
+* Cloud Failover Extension (CFE): [v1.14.0](https://github.com/F5Networks/f5-cloud-failover-extension/releases)
+* F5 Application Services Templates (FAST): [v1.24.0](https://github.com/F5Networks/f5-appsvcs-templates/releases)
+* BIG-IP Runtime-Init: [1.6.0](https://github.com/F5Networks/f5-bigip-runtime-init/releases)
+
+**TMOS version**
+
+All BIG-IPs are currently running with TMOS version 16.1.20200. 
+
+When deploying the Terraform scripts with the latest TMOS version 16.1.30200 Telemetry Streaming will fail event log data due to the following error as described in the here: [K05413010: After an upgrade, iRules using the loopback address may fail and log TCL errors](https://my.f5.com/manage/s/article/K05413010).
+
+-----
+
+## Introduction
 This workshop is intended to learn what it takes to deploy F5 BIG-IP into cloud through the use of automation and maintain it throughout its ADC lifecycle.
 
 The tasks include provisioning BIG-IPs via Terraform into Azure, build the BIG-IPs with declarative onboarding (DO) deploy and maintain application services through AS3 templates and using Telemetry Streaming to get visible what gets consumed by applications.
